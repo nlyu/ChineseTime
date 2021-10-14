@@ -1,0 +1,108 @@
+﻿@page "/Current"
+
+<div class="index">
+    <div class="index-main">
+        <div class="left">
+            @if (this.showLeftClock)
+            {
+                <div class="left-clock">
+                    <div class="clock">
+                        <div class="hourHand"></div>
+                        <div class="minuteHand"></div>
+                        <div class="secondHand"></div>
+                        <div class="center"></div>
+                        <ul>
+                            <li><span>1</span></li>
+                            <li><span>2</span></li>
+                            <li><span>3</span></li>
+                            <li><span>4</span></li>
+                            <li><span>5</span></li>
+                            <li><span>6</span></li>
+                            <li><span>7</span></li>
+                            <li><span>8</span></li>
+                            <li><span>9</span></li>
+                            <li><span>10</span></li>
+                            <li><span>11</span></li>
+                            <li><span>12</span></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="left-shichen">
+                </div>
+            }
+            <div class="zhou">
+                昼
+            </div>
+        </div>
+        <div class="right">
+            @if (this.showLeftClock)
+            {
+                <div class="right-clock">
+                    <div class="clock">
+                        <div class="hourHand"></div>
+                        <div class="minuteHand"></div>
+                        <div class="secondHand"></div>
+                        <div class="center"></div>
+                        <ul>
+                            <li><span>1</span></li>
+                            <li><span>2</span></li>
+                            <li><span>3</span></li>
+                            <li><span>4</span></li>
+                            <li><span>5</span></li>
+                            <li><span>6</span></li>
+                            <li><span>7</span></li>
+                            <li><span>8</span></li>
+                            <li><span>9</span></li>
+                            <li><span>10</span></li>
+                            <li><span>11</span></li>
+                            <li><span>12</span></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="right-shichen">
+                </div>
+            }
+            <div class="ye">
+                夜
+            </div>
+        </div>
+        <div class="buttom">
+        </div>
+    </div>
+</div>
+
+
+@code {
+    public bool isMorning = true;
+    public bool showLeftClock = true;
+    public bool showRightClock = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isMorning = true;
+        showLeftClock = true;
+        showRightClock = false;
+
+        await Task.CompletedTask;
+    }
+
+    public void SwitchMorning()
+    {
+        this.isMorning = true;
+        this.showLeftClock = false;
+        this.showRightClock = true;
+    }
+
+    public void SwitchNight()
+    {
+        this.isMorning = false;
+        this.showLeftClock = true;
+        this.showRightClock = false;
+    }
+}

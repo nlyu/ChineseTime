@@ -1,0 +1,149 @@
+﻿@page "/"
+@inject IChineseTimeDataManager ChineseTimeDataManager
+
+<div class="index">
+    <div class="index-main">
+        <div class="left">
+            @if (this.showLeftClock)
+            {
+                <div class="left-clock">
+                    <div class="clock">
+                        <div class="hourHand"></div>
+                        <div class="minuteHand"></div>
+                        <div class="secondHand"></div>
+                        <div class="center"></div>
+                        <ul>
+                            <li><span @onclick="@(e => OnClockClick(1))">1</span></li>
+                            <li><span @onclick="@(e => OnClockClick(2))">2</span></li>
+                            <li><span @onclick="@(e => OnClockClick(3))">3</span></li>
+                            <li><span @onclick="@(e => OnClockClick(4))">4</span></li>
+                            <li><span @onclick="@(e => OnClockClick(5))">5</span></li>
+                            <li><span @onclick="@(e => OnClockClick(6))">6</span></li>
+                            <li><span @onclick="@(e => OnClockClick(7))">7</span></li>
+                            <li><span @onclick="@(e => OnClockClick(8))">8</span></li>
+                            <li><span @onclick="@(e => OnClockClick(9))">9</span></li>
+                            <li><span @onclick="@(e => OnClockClick(10))">10</span></li>
+                            <li><span @onclick="@(e => OnClockClick(11))">11</span></li>
+                            <li><span @onclick="@(e => OnClockClick(12))">12</span></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="left-shichen">
+                </div>
+            }
+            <div class="zhou">
+                昼
+            </div>
+        </div>
+        <div class="right">
+            @if (this.showRightClock)
+            {
+                <div class="right-clock">
+                    <div class="clock">
+                        <div class="hourHand"></div>
+                        <div class="minuteHand"></div>
+                        <div class="secondHand"></div>
+                        <div class="center"></div>
+                        <ul>
+                            <li><span @onclick="@(e => OnClockClick(13))">13</span></li>
+                            <li><span @onclick="@(e => OnClockClick(14))">14</span></li>
+                            <li><span @onclick="@(e => OnClockClick(15))">15</span></li>
+                            <li><span @onclick="@(e => OnClockClick(16))">16</span></li>
+                            <li><span @onclick="@(e => OnClockClick(17))">17</span></li>
+                            <li><span @onclick="@(e => OnClockClick(18))">18</span></li>
+                            <li><span @onclick="@(e => OnClockClick(19))">19</span></li>
+                            <li><span @onclick="@(e => OnClockClick(20))">20</span></li>
+                            <li><span @onclick="@(e => OnClockClick(21))">21</span></li>
+                            <li><span @onclick="@(e => OnClockClick(22))">22</span></li>
+                            <li><span @onclick="@(e => OnClockClick(23))">23</span></li>
+                            <li><span @onclick="@(e => OnClockClick(24))">24</span></li>
+                        </ul>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="right-shichen">
+                    <div class="Hour"></div>
+                    <div class="RomanStartingHour">@this.currentHourData.Hour</div>
+                    <div class="RomanHour">@this.currentHourData.RomanHour</div>
+                    <div class="RomanHourRange">@this.currentHourData.RomanHourRange</div>
+                    <div class="Description">@this.currentHourData.Description</div>
+                    <div class="SubDescription">@this.currentHourData.SubDescription</div>
+                    <div class="Citation">@this.currentHourData.Citation</div>
+                    <div class="Link">@this.currentHourData.Wiki</div>
+                    <div class="Link">@this.currentHourData.Baidu</div>
+                </div>
+            }
+            <div class="ye">
+                夜
+            </div>
+        </div>
+        <div class="buttom">
+        </div>
+    </div>
+</div>
+
+
+@code {
+    private bool isMorning = true;
+    private bool showLeftClock = true;
+    private bool showRightClock = true;
+    private ChineseTimeByHour currentHourData = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        isMorning = true;
+        showLeftClock = true;
+        showRightClock = true;
+
+        await Task.CompletedTask;
+    }
+
+    public void SwitchToMorning()
+    {
+        this.isMorning = true;
+        this.showLeftClock = true;
+        this.showRightClock = false;
+    }
+
+    public void SwitchToNight()
+    {
+        this.isMorning = false;
+        this.showLeftClock = false;
+        this.showRightClock = true;
+    }
+
+    private Task OnClockClick(int hour)
+    {
+        // check
+        if (hour <= 0 && hour > 24)
+        {
+            return Task.CompletedTask;
+        }
+
+        // switch day night display
+        if (hour <= 12)
+        {
+            // day mode
+            SwitchToMorning();
+        }
+        else
+        {
+            // night mode
+            SwitchToNight();
+        }
+
+        SetCurrentHourData(hour);
+
+        return Task.CompletedTask;
+    }
+
+    private void SetCurrentHourData(int hour)
+    {
+        this.currentHourData = ChineseTimeDataManager.GetChineseTimeDataFromHour(hour);
+    }
+}
