@@ -1,7 +1,7 @@
 {
   "Hour": "午時",
-  "RomanStartingHour": "11",
-  "RomanHour": "晌午11点",
+  "RomanStartingHour": "12",
+  "RomanHour": "晌午12点",
   "RomanHourRange": "11:00 - 12:59",
   "Description": "午时即日中，又名日正、中午等。而正午十二时又有平午、平昼、亭午等别称。这时候太阳最猛烈，相传这时阳气达到极限，阴气将会产生",
   "SubDescription": "中饭？还是早饭？",

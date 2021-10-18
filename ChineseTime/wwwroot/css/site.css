@@ -47,6 +47,10 @@ body {
     position: absolute;
 }
 
+i {
+    cursor: pointer;
+}
+
 /*
     Index
 */
@@ -75,6 +79,18 @@ body {
     position: absolute;
     opacity: 1;
     z-index: 999;
+    animation: clockfadeIn;
+    animation-duration: 2s;
+}
+
+@keyframes clockfadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .right {
@@ -93,12 +109,231 @@ body {
     position: absolute;
     opacity: 1;
     z-index: 999;
+    animation: clockfadeIn;
+    animation-duration: 2s;
+}
+
+/*
+    Data Right Section
+*/
+
+.right-shichen {
+    top: 30%;
+    width: 70%;
+    position: absolute;
+    z-index: 999;
+    color: rgb(224, 237, 255);
+    font-family: 'Noto Serif SC', serif;
+    transition: all 0.5s ease-in-out;
+}
+
+.right-shichen div:hover{
+    margin-left: 10px;
+    transition: all 0.5s linear;
+}
+
+.right-shichen .RomanStartingHour {
+    font-size: 120px;
+    position: absolute;
+
+    top: 0;
+    left: 0;
+}
+
+.right-shichen .RomanStartingHour:hover {
+    color: #dcbdff;
+}
+
+.right-shichen .RomanHour {
+    font-size: 50px;
+    position: absolute;
+    top: 0;
+    left: 210px;
+}
+
+.right-shichen .RomanHourRange {
+    font-size: 40px;
+    position: absolute;
+
+    
+    top: 100px;
+    left: 230px;
+}
+
+.right-shichen .Description {
+    font-size: 20px;
+    position: absolute;
+
+    top: 200px;
+    left: 0;
+}
+
+.right-shichen .SubDescription {
+    font-size: 20px;
+    position: absolute;
+
+    top: 300px;
+    left: 0;
+}
+
+.right-shichen .KeyWord {
+    font-size: 40px;
+    position: absolute;
+    top: 400px;
+    right: 0;
+}
+
+.right-shichen .KeyWord:hover {
+    font-size: 45px;
+    color: #efb8ff;
+}
+
+.right-shichen .Citation {
+    font-size: 20px;
+    position: absolute;
+    top: 480px;
+    right: 0px;
+}
+
+.right-shichen .Link-Wiki {
+    font-size: 10px;
+    position: absolute;
+    top: 600px;
+}
+
+.right-shichen .Link-Baidu {
+    font-size: 10px;
+    position: absolute;
+    top: 600px;
+}
+
+#right-shichen-back {
+    font-size: 50px;
+    color: rgb(224, 237, 255);
+    position: absolute;
+    bottom: 200px;
+    left: 100px;
+    z-index: 1000;
+    font-family: 'Noto Serif SC', serif;
+    cursor: pointer;
+}
+
+#right-shichen-back:hover {
+    color: #dcbfde;
+}
+
+/*
+    Data Left Section
+*/
+.left-shichen {
+    top: 30%;
+    width: 70%;
+    position: absolute;
+    z-index: 999;
+    color: #374457;
+    font-family: 'Noto Serif SC', serif;
+    transition: all 0.5s ease-in-out;
+}
+
+.left-shichen div:hover {
+    margin-right: 10px;
+    transition: all 0.5s linear;
+}
+
+.left-shichen .RomanStartingHour {
+    font-size: 120px;
+    position: absolute;
+
+    top: 0;
+    right: 0;
+}
+
+.left-shichen .RomanStartingHour:hover {
+    color: #99485d;
+}
+
+
+.left-shichen .RomanHour {
+    font-size: 50px;
+    position: absolute;
+    top: 0;
+    right: 210px;
+}
+
+.left-shichen .RomanHourRange {
+    font-size: 40px;
+    position: absolute;
+
+    top: 100px;
+    right: 230px;
+}
+
+.left-shichen .Description {
+    font-size: 20px;
+    position: absolute;
+
+    
+    top: 200px;
+    right: 0;
+}
+
+.left-shichen .SubDescription {
+    font-size: 20px;
+    position: absolute;
+
+    top: 300px;
+    right: 0;
+}
+
+.left-shichen .KeyWord {
+    font-size: 40px;
+    position: absolute;
+    top: 400px;
+    left: 0;
+}
+
+.left-shichen .KeyWord:hover {
+    font-size: 45px;
+    color: #99485d;
+}
+
+.left-shichen .Citation {
+    font-size: 20px;
+    position: absolute;
+    top: 480px;
+    left: 0px;
+}
+
+.left-shichen .Link-Wiki {
+    font-size: 10px;
+    position: absolute;
+    top: 600px;
+}
+
+.left-shichen .Link-Baidu {
+    font-size: 10px;
+    position: absolute;
+    top: 600px;
+}
+
+#left-shichen-back {
+    font-size: 50px;
+    color: #001c45;
+    position: absolute;
+    bottom: 200px;
+    right: 100px;
+    z-index: 1000;
+    font-family: 'Noto Serif SC', serif;
+    cursor: pointer;
+}
+
+#left-shichen-back:hover{
+   color: #99485d;
 }
 
 /*
     big font
 */
-
 .zhou {
     font-family: 'Noto Serif SC', serif;
     font-size: 35vw;
@@ -112,9 +347,10 @@ body {
 .ye {
     font-family: 'Noto Serif SC', serif;
     font-size: 35vw;
-    color: #495970;
+    color: #374457;
     right: -5%;
     top: -240px;
+    z-index: 0;
     position: fixed;
 }
 
@@ -190,99 +426,104 @@ body {
     padding: 0;
 }
 
-    .clock ul li {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-        line-height: 20px;
-        font-size: 20px;
-        color: rgb(0, 18, 46);
-        cursor: pointer;
-    }
+.clock ul li {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 20px;
+    color: rgb(0, 18, 46);
+    cursor: pointer;
+}
 
-        .clock ul li:nth-child(1) {
-            right: 22%;
-            top: 6.5%;
-        }
+.clock ul li:nth-child(1) {
+    right: 22%;
+    top: 6.5%;
+}
 
-        .clock ul li:nth-child(2) {
-            right: 6%;
-            top: 25%;
-        }
+.clock ul li:nth-child(2) {
+    right: 6%;
+    top: 25%;
+}
 
-        .clock ul li:nth-child(3) {
-            right: 1%;
-            top: calc(50% - 10px);
-            color: #000;
-            font-size: 30px;
-            font-weight: bold;
-        }
+.clock ul li:nth-child(3) {
+    right: 1%;
+    top: calc(50% - 10px);
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
 
-        .clock ul li:nth-child(4) {
-            right: 6%;
-            top: 69%;
-        }
+.clock ul li:nth-child(4) {
+    right: 6%;
+    top: 69%;
+}
 
-        .clock ul li:nth-child(5) {
-            right: 22%;
-            top: 84%;
-        }
+.clock ul li:nth-child(5) {
+    right: 22%;
+    top: 84%;
+}
 
-        .clock ul li:nth-child(6) {
-            right: calc(50% - 10px);
-            top: calc(99% - 20px);
-            color: #000;
-            font-size: 30px;
-            font-weight: bold;
-        }
+.clock ul li:nth-child(6) {
+    right: calc(50% - 10px);
+    top: calc(99% - 20px);
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
 
-        .clock ul li:nth-child(7) {
-            left: 22%;
-            top: 84%;
-        }
+.clock ul li:nth-child(7) {
+    left: 22%;
+    top: 84%;
+}
 
-        .clock ul li:nth-child(8) {
-            left: 6%;
-            top: 69%;
-        }
+.clock ul li:nth-child(8) {
+    left: 6%;
+    top: 69%;
+}
 
-        .clock ul li:nth-child(9) {
-            left: 1%;
-            top: calc(50% - 10px);
-            color: #000;
-            font-size: 30px;
-            font-weight: bold;
-        }
+.clock ul li:nth-child(9) {
+    left: 1%;
+    top: calc(50% - 10px);
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
 
-        .clock ul li:nth-child(10) {
-            left: 6%;
-            top: 25%;
-        }
+.clock ul li:nth-child(10) {
+    left: 6%;
+    top: 25%;
+}
 
-        .clock ul li:nth-child(11) {
-            left: 22%;
-            top: 6.5%;
-        }
+.clock ul li:nth-child(11) {
+    left: 22%;
+    top: 6.5%;
+}
 
-        .clock ul li:nth-child(12) {
-            right: calc(50% - 10px);
-            top: 1%;
-            color: #000;
-            font-size: 30px;
-            font-weight: bold;
-        }
+.clock ul li:nth-child(12) {
+    right: calc(50% - 10px);
+    top: 1%;
+    color: #000;
+    font-size: 30px;
+    font-weight: bold;
+}
 
 /*
     Clock Animation
 */
 
-li > span:hover {
+li > span {
+    padding: 20px;
+    margin: -20px;
     width: 10px;
     border-radius: 50%;
-    font-size: 60px;
-    transition-duration: 0.1s;
-    transition-timing-function: linear;
+    transition: all .2s ease-in-out;
+}
+
+li > span:hover {
+    font-size: 50px;
+    transform: scale(1.1);
 }
 
 /*

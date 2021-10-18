@@ -4,6 +4,20 @@
 <div class="index">
     <div class="index-main">
         <div class="left">
+            <div class="left-shichen" style="right: @(this.leftShichenPosition)">
+                <div class="Hour"></div>
+                <div class="RomanStartingHour">@this.currentHourData.Hour</div>
+                <div class="RomanHour">@this.currentHourData.RomanHour</div>
+                <div class="RomanHourRange">@this.currentHourData.RomanHourRange</div>
+                <div class="Description">@this.currentHourData.Description</div>
+                <div class="SubDescription">@this.currentHourData.SubDescription</div>
+                <div class="KeyWord">@this.currentHourData.KeyWord</div>
+                <div class="Citation">@this.currentHourData.Citation</div>
+                <!--
+                    <a class="Link-Wiki">@this.currentHourData.Wiki</a>
+                    <a class="Link-Baidu">@this.currentHourData.Baidu</a>
+                -->
+            </div>
             @if (this.showLeftClock)
             {
                 <div class="left-clock">
@@ -31,14 +45,23 @@
             }
             else
             {
-                <div class="left-shichen">
-                </div>
+                <div id="left-shichen-back" @onclick="@(e => SwitchToIntialPage())">返回</div>
             }
             <div class="zhou">
                 昼
             </div>
         </div>
         <div class="right">
+            <div class="right-shichen" style="left: @(this.rightShichenPosition)">
+                <div class="Hour"></div>
+                <div class="RomanStartingHour">@this.currentHourData.Hour</div>
+                <div class="RomanHour">@this.currentHourData.RomanHour</div>
+                <div class="RomanHourRange">@this.currentHourData.RomanHourRange</div>
+                <div class="Description">@this.currentHourData.Description</div>
+                <div class="SubDescription">@this.currentHourData.SubDescription</div>
+                <div class="KeyWord">@this.currentHourData.KeyWord</div>
+                <div class="Citation">@this.currentHourData.Citation</div>
+            </div>
             @if (this.showRightClock)
             {
                 <div class="right-clock">
@@ -66,17 +89,7 @@
             }
             else
             {
-                <div class="right-shichen">
-                    <div class="Hour"></div>
-                    <div class="RomanStartingHour">@this.currentHourData.Hour</div>
-                    <div class="RomanHour">@this.currentHourData.RomanHour</div>
-                    <div class="RomanHourRange">@this.currentHourData.RomanHourRange</div>
-                    <div class="Description">@this.currentHourData.Description</div>
-                    <div class="SubDescription">@this.currentHourData.SubDescription</div>
-                    <div class="Citation">@this.currentHourData.Citation</div>
-                    <div class="Link">@this.currentHourData.Wiki</div>
-                    <div class="Link">@this.currentHourData.Baidu</div>
-                </div>
+                <div id="right-shichen-back" @onclick="@(e => SwitchToIntialPage())">返回</div>
             }
             <div class="ye">
                 夜
@@ -92,7 +105,9 @@
     private bool isMorning = true;
     private bool showLeftClock = true;
     private bool showRightClock = true;
-    private ChineseTimeByHour currentHourData = null;
+    private ChineseTimeByHour currentHourData = new ChineseTimeByHour();
+    private string leftShichenPosition = "100%";
+    private string rightShichenPosition = "100%";
 
     protected override async Task OnInitializedAsync()
     {
@@ -108,6 +123,7 @@
         this.isMorning = true;
         this.showLeftClock = true;
         this.showRightClock = false;
+        this.rightShichenPosition = "5%";
     }
 
     public void SwitchToNight()
@@ -115,6 +131,16 @@
         this.isMorning = false;
         this.showLeftClock = false;
         this.showRightClock = true;
+        this.leftShichenPosition = "5%";
+    }
+
+    public void SwitchToIntialPage()
+    {
+        this.isMorning = true;
+        this.showLeftClock = true;
+        this.showRightClock = true;
+        this.leftShichenPosition = "100%";
+        this.rightShichenPosition = "100%";
     }
 
     private Task OnClockClick(int hour)

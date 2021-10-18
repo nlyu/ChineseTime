@@ -12,6 +12,7 @@ namespace ChineseTime.Data
         private readonly int time = 5 * 60 ;
         private readonly string pathToData = Environment.CurrentDirectory + "/Data/Shicheng/";
         private readonly IChineseTimeDataManager shichengDataManager;
+        private readonly ChineseTimeByHour nullChineseTimeByHour = new ChineseTimeByHour();
 
         public ChineseTimeDataLoader(IChineseTimeDataManager shichengDataManager)
         {
@@ -33,13 +34,8 @@ namespace ChineseTime.Data
         private bool LoadDataFromPath()
         {
             // Load all 12 chinese time
-            for (var hour = 1; hour < 24; hour++)
+            for (var hour = 1; hour <= 24; hour++)
             {
-                if (hour % 2 == 0)
-                {
-                    continue;
-                }
-
                 // Read data file and convert to JSON
                 var hourDataJSON = new ChineseTimeByHour();
                 try
@@ -49,6 +45,7 @@ namespace ChineseTime.Data
                     {
                         string json = r.ReadToEnd();
                         hourDataJSON = JsonConvert.DeserializeObject<ChineseTimeByHour>(json);
+                        shichengDataManager.AddChineseTimeByHour(hour, hourDataJSON);
                     }
                 }
                 catch (Exception)
@@ -58,8 +55,14 @@ namespace ChineseTime.Data
                 }
                 finally
                 {
-                    this.shichengDataManager.AddChineseTimeByHour(hour, new ChineseTimeByHour());
-                    Console.WriteLine($"Shichen: app sucessfully load data from hour {hour}.");
+                    if (hourDataJSON == null)
+                    {
+                        shichengDataManager.AddChineseTimeByHour(hour, new ChineseTimeByHour());
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Shichen: app sucessfully load data from hour {hour}.");
+                    }
                 }
             }
 

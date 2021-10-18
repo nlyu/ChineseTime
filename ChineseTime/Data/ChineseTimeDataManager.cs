@@ -6,7 +6,7 @@ namespace ChineseTime.Data
     internal class ChineseTimeDataManager : IChineseTimeDataManager
     {
         private readonly IDictionary<int, ChineseTimeByHour> chineseTimeByHourData = new Dictionary<int, ChineseTimeByHour>();
-        private readonly string pathToData = Environment.CurrentDirectory + "Shicheng";
+        private readonly ChineseTimeByHour nullChineseTimeByHour = new ChineseTimeByHour();
 
         public ChineseTimeDataManager()
         {
@@ -16,15 +16,15 @@ namespace ChineseTime.Data
         {
             if (hour < 0 || hour > 24)
             {
-                return null;
+                return nullChineseTimeByHour;
             }
 
             if (chineseTimeByHourData.TryGetValue(hour, out var chineseTimeByHour))
             {
-                return null;
+                return chineseTimeByHour;
             }
 
-            return chineseTimeByHour;
+            return nullChineseTimeByHour;
         }
 
         public void AddChineseTimeByHour(int hour, ChineseTimeByHour data)
