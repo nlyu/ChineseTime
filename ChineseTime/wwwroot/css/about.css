@@ -1,0 +1,17 @@
+.about-left {
+    height: 100%;
+    width: 50%;
+    left: 0px;
+    position: absolute;
+    background-color: white;
+    opacity: 0.8;
+}
+
+.about-right {
+    height: 100%;
+    width: 60%;
+    right: 0px;
+    position: absolute;
+    background-color: #001c45;
+    opacity: 0.8;
+}
