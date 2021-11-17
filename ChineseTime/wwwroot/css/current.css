@@ -1,0 +1,11 @@
+.current-time-main {
+    text-align: center;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+    font-size: 100px;
+    font-family: 'Noto Serif SC', serif;
+}

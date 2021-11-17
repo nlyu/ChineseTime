@@ -88,11 +88,13 @@
 .about-right-version {
     top: 70%;
     width: 100%;
+    height: 100%;
 }
 
 .about-right-todo {
-    top: 100%;
+    top: 120%;
     width: 100%;
+    height: 100%;
 }
 
 .about-right-title {
@@ -129,5 +131,6 @@
 .about-right-link {
     top: 50%;
     width: 100%;
+    height: 100%;
 }
 

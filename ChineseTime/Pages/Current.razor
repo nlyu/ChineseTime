@@ -1,108 +1,147 @@
 ﻿@page "/Current"
+@using System.Threading
 
 <div class="index">
-    <div class="index-main">
-        <div class="left">
-            @if (this.showLeftClock)
-            {
-                <div class="left-clock">
-                    <div class="clock">
-                        <div class="hourHand"></div>
-                        <div class="minuteHand"></div>
-                        <div class="secondHand"></div>
-                        <div class="center"></div>
-                        <ul>
-                            <li><span>1</span></li>
-                            <li><span>2</span></li>
-                            <li><span>3</span></li>
-                            <li><span>4</span></li>
-                            <li><span>5</span></li>
-                            <li><span>6</span></li>
-                            <li><span>7</span></li>
-                            <li><span>8</span></li>
-                            <li><span>9</span></li>
-                            <li><span>10</span></li>
-                            <li><span>11</span></li>
-                            <li><span>12</span></li>
-                        </ul>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div class="left-shichen">
-                </div>
-            }
-            <div class="zhou">
-                昼
-            </div>
+    <style @onload="@this.backgroundTimerStart"></style>
+    <div class="current-time-main">
+        <div class="current-time-year">
+            @this.constructShowYear(this.showtime)
         </div>
-        <div class="right">
-            @if (this.showLeftClock)
-            {
-                <div class="right-clock">
-                    <div class="clock">
-                        <div class="hourHand"></div>
-                        <div class="minuteHand"></div>
-                        <div class="secondHand"></div>
-                        <div class="center"></div>
-                        <ul>
-                            <li><span>1</span></li>
-                            <li><span>2</span></li>
-                            <li><span>3</span></li>
-                            <li><span>4</span></li>
-                            <li><span>5</span></li>
-                            <li><span>6</span></li>
-                            <li><span>7</span></li>
-                            <li><span>8</span></li>
-                            <li><span>9</span></li>
-                            <li><span>10</span></li>
-                            <li><span>11</span></li>
-                            <li><span>12</span></li>
-                        </ul>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <div class="right-shichen">
-                </div>
-            }
-            <div class="ye">
-                夜
-            </div>
+        <div class="current-time-date">
+            @this.constructShowDate(this.showtime)
         </div>
-        <div class="buttom">
+        <div class="current-time-time">
+            @this.showtime.time
+        </div>
+        <div class="current-time-bonus">
+            @this.showtime.dayOfWeek
         </div>
     </div>
 </div>
 
-
 @code {
-    public bool isMorning = true;
-    public bool showLeftClock = true;
-    public bool showRightClock = false;
+    private DateTime time;
+    private int refreshTime = 1 * 1000;
+    private int stopCounter = 5;
+    private int startDelayTime = 1 * 1000;
+    private int intervalDelayTime = 1 * 1000;
+    private ChineseTime showtime = new ChineseTime();
 
     protected override async Task OnInitializedAsync()
     {
-        isMorning = true;
-        showLeftClock = true;
-        showRightClock = false;
-
         await Task.CompletedTask;
     }
 
-    public void SwitchMorning()
+    private string constructShowYear(ChineseTime showtime)
     {
-        this.isMorning = true;
-        this.showLeftClock = false;
-        this.showRightClock = true;
+        if (showtime.year == null || string.IsNullOrEmpty(showtime.year))
+        {
+            return "年轮感知中...";
+        }
+
+        return $"公元{this.showtime.year}年";
     }
 
-    public void SwitchNight()
+    private string constructShowDate(ChineseTime showtime)
     {
-        this.isMorning = false;
-        this.showLeftClock = true;
-        this.showRightClock = false;
+        if (showtime.year == null || string.IsNullOrEmpty(showtime.year))
+        {
+            return "日期校正中...";
+        }
+
+        return $"{this.showtime.month}月{this.showtime.day}日";
+    }
+
+    private void backgroundTimerStart()
+    {
+        var timer = new Timer(new TimerCallback(_ =>
+        {
+            this.updateCurrentChineseTime(DateTime.Now);
+            InvokeAsync(() =>
+                {
+                    StateHasChanged();
+                });
+        }), null, this.startDelayTime, this.intervalDelayTime);
+    }
+
+    private void updateCurrentChineseTime(DateTime time)
+    {
+        if (time == DateTime.MinValue)
+        {
+            this.showtime.year = "逝者如斯夫，不舍昼夜";
+            this.showtime.month = "逝者如斯夫，不舍昼夜";
+            this.showtime.day = "逝者如斯夫，不舍昼夜";
+        }
+
+        this.showtime.year = this.chineseYearConverter(time.Year.ToString());
+        this.showtime.month = this.chineseMonthConverter(time.Month.ToString());
+        this.showtime.day = this.chineseMonthConverter(time.Day.ToString());
+        this.showtime.time = time.ToString("HH:mm:ss tt");
+        this.showtime.dayOfWeek = this.chineseWeekDayConverter(time.DayOfWeek);
+    }
+
+    private string chineseNumberConverter(int num)
+    {
+        if(num < 0 || num > 10)
+        {
+            return "迷";
+        }
+
+        string[] chineseNum = new[] { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"};
+        return chineseNum[num];
+    }
+
+    private string chineseYearConverter(string year)
+    {
+        string chineseYear = string.Empty;
+        foreach(var num in year)
+        {
+            chineseYear += this.chineseNumberConverter(num - '0');
+        }
+
+        return chineseYear;
+    }
+
+    private string chineseMonthConverter(string year)
+    {
+        string chineseYear = string.Empty;
+        foreach(var num in year)
+        {
+            chineseYear += this.chineseNumberConverter(num - '0');
+        }
+
+        return chineseYear;
+    }
+
+    private string chineseWeekDayConverter(DayOfWeek dayOfWeek)
+    {
+        switch(dayOfWeek)
+        {
+            case DayOfWeek.Monday:
+                return "周一";
+            case DayOfWeek.Tuesday:
+                return "周二";
+            case DayOfWeek.Wednesday:
+                return "周三";
+            case DayOfWeek.Thursday:
+                return "周四";
+            case DayOfWeek.Friday:
+                return "周五";
+            case DayOfWeek.Saturday:
+                return "周六";
+            case DayOfWeek.Sunday:
+                return "周日";
+            default:
+                return "今天周几?";
+        }
+    }
+
+    private class ChineseTime
+    {
+        public string year { get; set; }
+        public string month { get; set; }
+        public string day { get; set; }
+        public string time { get; set; }
+        public string dayOfWeek { get; set; }
     }
 }
