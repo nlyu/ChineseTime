@@ -86,13 +86,13 @@
 }
 
 .about-right-version {
-    top: 70%;
+    top: 600px;
     width: 100%;
     height: 100%;
 }
 
 .about-right-todo {
-    top: 120%;
+    top: 950px;
     width: 100%;
     height: 100%;
 }
@@ -124,12 +124,12 @@
 }
 
 .about-right-content {
-    top: 10%;
+    top: 100px;
     position: absolute;
 }
 
 .about-right-link {
-    top: 50%;
+    top: 400px;
     width: 100%;
     height: 100%;
 }

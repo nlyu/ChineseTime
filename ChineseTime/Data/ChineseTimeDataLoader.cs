@@ -34,7 +34,7 @@ namespace ChineseTime.Data
         private bool LoadDataFromPath()
         {
             // Load all 12 chinese time
-            for (var hour = 1; hour <= 24; hour++)
+            for (var hour = 0; hour <= 24; hour++)
             {
                 // Read data file and convert to JSON
                 var hourDataJSON = new ChineseTimeByHour();

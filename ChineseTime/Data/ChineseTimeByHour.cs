@@ -2,7 +2,7 @@
 {
     internal class ChineseTimeByHour
     {
-        public string Hour { get; set; } = "404";
+        public string Hour { get; set; } = "時零時";
         public string RomanStartingHour { get; set; } = "虚无";
         public string RomanHour { get; set; } = "永恒";
         public string RomanHourRange { get; set; } = "正无穷 - 负无穷";

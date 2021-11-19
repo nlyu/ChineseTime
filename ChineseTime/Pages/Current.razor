@@ -1,9 +1,13 @@
 ﻿@page "/Current"
+@inject IChineseTimeDataManager ChineseTimeDataManager
 @using System.Threading
 
 <div class="index">
     <style @onload="@this.backgroundTimerStart"></style>
     <div class="current-time-main">
+        <div class="current-time-hour">
+            @this.showChineseTime.Hour
+        </div>
         <div class="current-time-year">
             @this.constructShowYear(this.showtime)
         </div>
@@ -11,10 +15,24 @@
             @this.constructShowDate(this.showtime)
         </div>
         <div class="current-time-time">
-            @this.showtime.time
+            @if (string.IsNullOrEmpty(this.showtime.time))
+            {
+                <span>"不明"</span>
+            }
+            else
+            {
+                <span>@this.showtime.time</span>
+            }
         </div>
         <div class="current-time-bonus">
-            @this.showtime.dayOfWeek
+            @if (string.IsNullOrEmpty(this.showtime.time))
+            {
+                <span>"不明"</span>
+            }
+            else
+            {
+                <span>@this.showtime.dayOfWeek</span>
+            }
         </div>
     </div>
 </div>
@@ -26,6 +44,8 @@
     private int startDelayTime = 1 * 1000;
     private int intervalDelayTime = 1 * 1000;
     private ChineseTime showtime = new ChineseTime();
+    private ChineseTimeByHour showChineseTime = new ChineseTimeByHour();
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -57,10 +77,13 @@
         var timer = new Timer(new TimerCallback(_ =>
         {
             this.updateCurrentChineseTime(DateTime.Now);
+            var chinesetime = ChineseTimeDataManager.GetChineseTimeDataFromHour(DateTime.Now.Hour);
+            this.showChineseTime = chinesetime;
+
             InvokeAsync(() =>
-                {
-                    StateHasChanged();
-                });
+            {
+                StateHasChanged();
+            });
         }), null, this.startDelayTime, this.intervalDelayTime);
     }
 
@@ -82,19 +105,19 @@
 
     private string chineseNumberConverter(int num)
     {
-        if(num < 0 || num > 10)
+        if (num < 0 || num > 10)
         {
             return "迷";
         }
 
-        string[] chineseNum = new[] { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"};
+        string[] chineseNum = new[] { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十" };
         return chineseNum[num];
     }
 
     private string chineseYearConverter(string year)
     {
         string chineseYear = string.Empty;
-        foreach(var num in year)
+        foreach (var num in year)
         {
             chineseYear += this.chineseNumberConverter(num - '0');
         }
@@ -105,7 +128,7 @@
     private string chineseMonthConverter(string year)
     {
         string chineseYear = string.Empty;
-        foreach(var num in year)
+        foreach (var num in year)
         {
             chineseYear += this.chineseNumberConverter(num - '0');
         }
@@ -115,7 +138,7 @@
 
     private string chineseWeekDayConverter(DayOfWeek dayOfWeek)
     {
-        switch(dayOfWeek)
+        switch (dayOfWeek)
         {
             case DayOfWeek.Monday:
                 return "周一";
