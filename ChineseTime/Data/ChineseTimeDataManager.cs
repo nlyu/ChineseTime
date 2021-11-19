@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ChineseTime.Data
 {
@@ -29,7 +28,7 @@ namespace ChineseTime.Data
 
         public void AddChineseTimeByHour(int hour, ChineseTimeByHour data)
         {
-            this.chineseTimeByHourData[hour] = data;
+            chineseTimeByHourData[hour] = data;
         }
     }
 }

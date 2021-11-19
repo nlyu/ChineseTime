@@ -9,7 +9,7 @@ namespace ChineseTime.Data
 {
     internal class ChineseTimeDataLoader : IHostedService
     {
-        private readonly int time = 5 * 60 ;
+        private readonly int time = 5 * 60;
         private readonly string pathToData = Environment.CurrentDirectory + "/Data/Shicheng/";
         private readonly IChineseTimeDataManager shichengDataManager;
         private readonly ChineseTimeByHour nullChineseTimeByHour = new ChineseTimeByHour();
@@ -23,7 +23,7 @@ namespace ChineseTime.Data
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             LoadDataFromPath();
-            await Task.Delay(this.time, cancellationToken);
+            await Task.Delay(time, cancellationToken);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
@@ -40,7 +40,7 @@ namespace ChineseTime.Data
                 var hourDataJSON = new ChineseTimeByHour();
                 try
                 {
-                    var hourDataFileName = pathToData + this.LoadDataFromFile(hour);
+                    var hourDataFileName = pathToData + LoadDataFromFile(hour);
                     using (StreamReader r = new StreamReader(hourDataFileName))
                     {
                         string json = r.ReadToEnd();
