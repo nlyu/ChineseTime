@@ -102,7 +102,6 @@
 
 
 @code {
-    private bool isMorning = true;
     private bool showLeftClock = true;
     private bool showRightClock = true;
     private ChineseTimeByHour currentHourData = new ChineseTimeByHour();
@@ -111,7 +110,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        isMorning = true;
         showLeftClock = true;
         showRightClock = true;
 
@@ -120,7 +118,6 @@
 
     public void SwitchToMorning()
     {
-        this.isMorning = true;
         this.showLeftClock = true;
         this.showRightClock = false;
         this.rightShichenPosition = "5%";
@@ -128,7 +125,6 @@
 
     public void SwitchToNight()
     {
-        this.isMorning = false;
         this.showLeftClock = false;
         this.showRightClock = true;
         this.leftShichenPosition = "5%";
@@ -136,7 +132,6 @@
 
     public void SwitchToIntialPage()
     {
-        this.isMorning = true;
         this.showLeftClock = true;
         this.showRightClock = true;
         this.leftShichenPosition = "100%";

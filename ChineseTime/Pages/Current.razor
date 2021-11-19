@@ -38,13 +38,45 @@
 </div>
 
 @code {
-    private DateTime time;
-    private int refreshTime = 1 * 1000;
-    private int stopCounter = 5;
     private int startDelayTime = 1 * 1000;
     private int intervalDelayTime = 1 * 1000;
     private ChineseTime showtime = new ChineseTime();
     private ChineseTimeByHour showChineseTime = new ChineseTimeByHour();
+    private string[] NumberConverterChineseTable = new string[]
+    {
+        "零",
+        "一",
+        "二",
+        "三",
+        "四",
+        "五",
+        "六",
+        "七",
+        "八",
+        "九",
+        "十",
+        "十一",
+        "十二",
+        "十三",
+        "十四",
+        "十五",
+        "十六",
+        "十七",
+        "十八",
+        "十九",
+        "二十",
+        "二十一",
+        "二十二",
+        "二十三",
+        "二十四",
+        "二十五",
+        "二十六",
+        "二十七",
+        "二十八",
+        "二十九",
+        "三十",
+        "三十一",
+    };
 
 
     protected override async Task OnInitializedAsync()
@@ -97,8 +129,8 @@
         }
 
         this.showtime.year = this.chineseYearConverter(time.Year.ToString());
-        this.showtime.month = this.chineseMonthConverter(time.Month.ToString());
-        this.showtime.day = this.chineseMonthConverter(time.Day.ToString());
+        this.showtime.month = this.chineseNumConverter(time.Month);
+        this.showtime.day = this.chineseNumConverter(time.Day);
         this.showtime.time = time.ToString("HH:mm:ss tt");
         this.showtime.dayOfWeek = this.chineseWeekDayConverter(time.DayOfWeek);
     }
@@ -125,15 +157,9 @@
         return chineseYear;
     }
 
-    private string chineseMonthConverter(string year)
+    private string chineseNumConverter(int num)
     {
-        string chineseYear = string.Empty;
-        foreach (var num in year)
-        {
-            chineseYear += this.chineseNumberConverter(num - '0');
-        }
-
-        return chineseYear;
+        return this.NumberConverterChineseTable[num];
     }
 
     private string chineseWeekDayConverter(DayOfWeek dayOfWeek)
