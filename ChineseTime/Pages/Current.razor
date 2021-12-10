@@ -1,5 +1,6 @@
 ﻿@page "/current"
 @inject IChineseTimeDataManager ChineseTimeDataManager
+@inject TimeZoneService TimeZoneService
 @using System.Threading
 
 <div class="index">
@@ -38,6 +39,8 @@
 </div>
 
 @code {
+    private DateTimeOffset now;
+
     private int startDelayTime = 1 * 1000;
     private int intervalDelayTime = 1 * 1000;
     private ChineseTime showtime = new ChineseTime();
@@ -81,6 +84,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        now = await TimeZoneService.GetLocalDateTime(DateTimeOffset.UtcNow);
         await Task.CompletedTask;
     }
 
@@ -108,7 +112,7 @@
     {
         var timer = new Timer(new TimerCallback(_ =>
         {
-            this.updateCurrentChineseTime(DateTime.Now);
+            this.updateCurrentChineseTime(this.now.DateTime);
             var chinesetime = ChineseTimeDataManager.GetChineseTimeDataFromHour(DateTime.Now.Hour);
             this.showChineseTime = chinesetime;
 
