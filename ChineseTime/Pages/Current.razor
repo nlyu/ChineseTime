@@ -110,8 +110,9 @@
 
     private void backgroundTimerStart()
     {
-        var timer = new Timer(new TimerCallback(_ =>
+        var timer = new Timer(new TimerCallback( async _ =>
         {
+            this.now = await TimeZoneService.GetLocalDateTime(DateTimeOffset.UtcNow);
             this.updateCurrentChineseTime(this.now.DateTime);
             var chinesetime = ChineseTimeDataManager.GetChineseTimeDataFromHour(DateTime.Now.Hour);
             this.showChineseTime = chinesetime;
