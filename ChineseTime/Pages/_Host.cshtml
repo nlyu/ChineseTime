@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ChineseTime</title>
+    <title>时辰 shichen Chinese time</title>
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
@@ -32,11 +32,12 @@
     <div id="particles-js"></div>
 
     <app class="app">
-        <component type="typeof(App)" render-mode="ServerPrerendered" />
+        <component type="typeof(App)" render-mode="Server" />
     </app>
 
     <script src="_framework/blazor.server.js"></script>
     <script src="/js/particles.js"></script>
-    <script src="app.js"></script>
+    <script src="~/app.js"></script>
+    <script src="~/localTime.js"></script>
 </body>
 </html>
