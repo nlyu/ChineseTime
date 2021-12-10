@@ -23,8 +23,6 @@ namespace ChineseTime.Service
                 _userOffset = TimeSpan.FromMinutes(-offsetInMinutes);
             }
 
-            // TODO: Require server render mode while instantiating the component to execute JavaScript in OnInitializedAsync.
-            // In _Host.cshtml: <component type="typeof(App)" render-mode="Server" />
             return dateTime.ToOffset(_userOffset.Value);
         }
     }
