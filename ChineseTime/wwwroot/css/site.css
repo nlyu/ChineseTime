@@ -1,3 +1,14 @@
+/*
+    Font size difinition
+*/
+:root {
+    --romanHour-font-size: min(3vw, 50px);
+    --romanHourRange-font-size: min(3vw, 35px);
+    --description-font-size: min(2vw, 17px);
+    --subDescription-font-size: min(2vw, 17px);
+    --citation-font-size: min(2vw, 17px);
+}
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -135,7 +146,7 @@ i {
 }
 
 .right-shichen .RomanStartingHour {
-    font-size: 120px;
+    font-size: 110px;
     position: absolute;
 
     top: 0;
@@ -147,23 +158,22 @@ i {
 }
 
 .right-shichen .RomanHour {
-    font-size: 50px;
+    font-size: var(--romanHour-font-size);
     position: absolute;
     top: 0;
     left: 210px;
 }
 
 .right-shichen .RomanHourRange {
-    font-size: 40px;
+    font-size: var(--romanHourRange-font-size);
     position: absolute;
 
-    
     top: 100px;
-    left: 230px;
+    left: 200px;
 }
 
 .right-shichen .Description {
-    font-size: 20px;
+    font-size: var(--description-font-size);
     position: absolute;
 
     top: 200px;
@@ -171,7 +181,7 @@ i {
 }
 
 .right-shichen .SubDescription {
-    font-size: 20px;
+    font-size: var(--subDescription-font-size);
     position: absolute;
 
     top: 300px;
@@ -181,7 +191,7 @@ i {
 .right-shichen .KeyWord {
     font-size: 40px;
     position: absolute;
-    top: 400px;
+    top: 390px;
     right: 0;
 }
 
@@ -191,9 +201,9 @@ i {
 }
 
 .right-shichen .Citation {
-    font-size: 20px;
+    font-size: var(--citation-font-size);
     position: absolute;
-    top: 480px;
+    top: 450px;
     right: 0px;
 }
 
@@ -256,14 +266,14 @@ i {
 
 
 .left-shichen .RomanHour {
-    font-size: 50px;
+    font-size: var(--romanHour-font-size);
     position: absolute;
     top: 0;
     right: 210px;
 }
 
 .left-shichen .RomanHourRange {
-    font-size: 40px;
+    font-size: var(--romanHourRange-font-size);
     position: absolute;
 
     top: 100px;
@@ -271,7 +281,7 @@ i {
 }
 
 .left-shichen .Description {
-    font-size: 20px;
+    font-size: var(--description-font-size);
     position: absolute;
 
     
@@ -280,7 +290,7 @@ i {
 }
 
 .left-shichen .SubDescription {
-    font-size: 20px;
+    font-size: var(--subDescription-font-size);
     position: absolute;
 
     top: 300px;
@@ -290,7 +300,7 @@ i {
 .left-shichen .KeyWord {
     font-size: 40px;
     position: absolute;
-    top: 400px;
+    top: 390px;
     left: 0;
 }
 
@@ -300,9 +310,9 @@ i {
 }
 
 .left-shichen .Citation {
-    font-size: 20px;
+    font-size: var(--citation-font-size);
     position: absolute;
-    top: 480px;
+    top: 450px;
     left: 0px;
 }
 
