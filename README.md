@@ -16,6 +16,12 @@ Better explained here: https://www.quora.com/What-is-Chinese-clock
 ### Link
 https://shichen.live
 
+![1](/1.png)
+
+![2](/2.png)
+
+![3](/3.png)
+
 ### Feature
 1. Chinese time converter
 2. Current chinese time and local time
