@@ -72,6 +72,7 @@ i {
     height: 100%;
     width: 100%;
     position: absolute;
+    overflow: hidden;
 }
 
 .left {
@@ -81,6 +82,7 @@ i {
     position: absolute;
     background-color: white;
     opacity: 0.8;
+    overflow: hidden;
 }
 
 .left-clock {
@@ -93,6 +95,7 @@ i {
     animation: clockfadeIn;
     animation-duration: 2s;
     transform: translateY(-50%);
+    overflow: hidden;
 }
 
 @keyframes clockfadeIn {
@@ -112,6 +115,7 @@ i {
     position: absolute;
     background-color: #001c45;
     opacity: 0.8;
+    overflow: hidden;
 }
 
 .right-clock {
