@@ -1,3 +1,7 @@
+:root {
+    --about-font-size: min(2vw, 15px);
+}
+
 .about-left {
     height: 100%;
     width: 40%;
@@ -126,6 +130,7 @@
 .about-right-content {
     top: 100px;
     position: absolute;
+    font-size: var(--about-font-size);
 }
 
 .about-right-link {
