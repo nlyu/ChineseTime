@@ -51,7 +51,3 @@ https://shichen.live
 19:00~20:59 is called Xu Shi (戌时)
 
 21:00~22:59 is called Hai Shi (亥时)
-
-And there is another system to express the time at night.
-
-19:00~20:59 is called Yi Geng(一更)
