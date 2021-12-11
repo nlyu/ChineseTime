@@ -114,7 +114,7 @@
         {
             this.now = await TimeZoneService.GetLocalDateTime(DateTimeOffset.UtcNow);
             this.updateCurrentChineseTime(this.now.DateTime);
-            var chinesetime = ChineseTimeDataManager.GetChineseTimeDataFromHour(DateTime.Now.Hour);
+            var chinesetime = ChineseTimeDataManager.GetChineseTimeDataFromHour(this.now.DateTime.Hour);
             this.showChineseTime = chinesetime;
 
             InvokeAsync(() =>
